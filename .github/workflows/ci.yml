@@ -20,8 +20,9 @@ jobs:
       
       - name: Install dependencies
         run: npm ci
+
       - name: Run Tests
-      - run: npm run test
+        run: npm run test
 
 #      - name: Check Go Version
 #        run: go version
