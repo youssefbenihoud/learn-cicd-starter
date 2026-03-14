@@ -8,15 +8,21 @@ jobs:
   style:
     name: Style Code
     runs-on: ubuntu-latest
-
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4 # WICHTIG: Code muss geladen werden
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
       - name: Formatting Check
         run: npm run format:check
 
   tests:
     name: Tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -24,17 +30,16 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.26.0"
+          go-version: "1.24.0" # Korrigierte Version
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Install dependencies
         run: npm ci
 
       - name: Run Tests
         run: npm run test --coverage
-
-#      - name: Check Go Version
-#        run: go version
-
-#      - name: Force Failure
-#        run: (exit 1)
 
